@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  name        String       @db.VarChar(150)
+  code        String       @db.VarChar(10)
+  level       Level
+  semester    Semester
+  students    Student[] //@relation(fields: [userId], references: [id], onDelete: Cascade)
+  lecturers   Lecturer[]
+  attendances Attendance[]
+
+}
+
+model Student {
+  id          String                  @id @default(cuid())
+  name        String                  @db.VarChar(150)
+  indexnumber String                  @unique
+  createdAt   DateTime                @default(now())
+  courses     Course[]
+  group       Group                   @default(ONE)
+  level       Level
+  session     Session
+  attendances StudentsInAttendances[]
+}
+
+model Lecturer {
+  id       String  @id @default(cuid())
+  name     String  @db.VarChar(150)
+  email    String  @unique
+  password String  @unique
+  session  Session
+  courseId String
+  course   Course? @relation(fields: [courseId], references: [id])
+
+
+  @@index([courseId])
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String @unique
+}
+
+model Attendance {
+  id        String                  @id @default(cuid())
+  level     Level
+  session   Session
+  createdAt DateTime                @default(now())
+  group     Group                   @default(ONE)
+  year      Int                     @db.Int
+  courseId  String
+  course    Course                  @relation(fields: [courseId], references: [id])
+  code      String                  @db.VarChar(10)
+  students  StudentsInAttendances[]
+
+  @@index([courseId])
+}
+
+model StudentsInAttendances {
+  attendance   Attendance @relation(fields: [attendanceId], references: [id], onUpdate: NoAction)
+  attendanceId String
+  student      Student    @relation(fields: [studentId], references: [id], onUpdate: NoAction)
+  studentId    String
+  signedAt     DateTime   @default(now())
+
+  @@id([attendanceId, studentId])
+}
+
+enum Session {
+  MORNING
+  EVENING
+  WEEKEND
+}
+
+enum Level {
+  L100
+  L200
+  L300
+  L400
+}
+
+enum Group {
+  ONE
+  TWO
+  THREE
+  FOUR
+}
+
+enum Semester {
+  FIRST
+  SECOND
+}
