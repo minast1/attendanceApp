@@ -73,7 +73,7 @@ const LecturerDashboard = () => {
   const [toggle, setToggle] = React.useState<boolean>(false);
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Alert severity="info">
         <AlertTitle>{`Welcome ${lecturer?.name} to the Lecturer Dashboard`}</AlertTitle>
         <Stack>

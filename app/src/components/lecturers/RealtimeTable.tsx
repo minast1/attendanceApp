@@ -37,7 +37,7 @@ export default function RealtimeTable({
     (student) => student.group === attendance.group
   );
 
-  console.log(lecturer?.course?.students);
+  //console.log(lecturer?.course?.students);
 
   return (
     <Card>
@@ -45,44 +45,41 @@ export default function RealtimeTable({
         <Stack spacing={1} sx={{ mb: 1 }} direction="row">
           <Chip
             size="small"
-            //variant="outlined"
-            //sx={{ width: "45%" }}
+            variant="outlined"
+            color="primary"
             label={
-              <Typography sx={{ fontSize: 15, color: "white" }}>
+              <Typography sx={{ fontSize: 15, color: "#1a237e" }}>
                 Total :{" "}
                 <span style={{ fontWeight: "bold" }}>{total?.length}</span>
               </Typography>
             }
-            color="primary"
           />
           <Chip
             size="small"
-            //variant="outlined"
-            // sx={{ width: "45%" }}
+            variant="outlined"
+            color="primary"
             label={
-              <Typography sx={{ fontSize: 15, color: "white" }}>
+              <Typography sx={{ fontSize: 15, color: "#1a237e" }}>
                 Present:{" "}
                 <span style={{ fontWeight: "bold" }}>
                   {attendance.students.length}
                 </span>
               </Typography>
             }
-            color="primary"
           />
           {typeof total !== "undefined" && (
             <Chip
               size="small"
-              //variant="outlined"
-
+              variant="outlined"
+              color="primary"
               label={
-                <Typography sx={{ fontSize: 15, color: "white" }}>
+                <Typography sx={{ fontSize: 15, color: "#1a237e" }}>
                   Absent:{" "}
                   <span style={{ fontWeight: "bold" }}>
                     {total?.length - attendance.students.length}
                   </span>
                 </Typography>
               }
-              color="primary"
             />
           )}
         </Stack>
