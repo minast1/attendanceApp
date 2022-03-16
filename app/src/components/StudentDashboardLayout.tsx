@@ -93,7 +93,7 @@ export default function StudentDashboardLayout({
       >
         <Toolbar />
 
-        <Container component="main" maxWidth={false} sx={{ mt: 10, mb: 4 }}>
+        <Container component="main" maxWidth={false} sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={3} lg={3}>
               <ProfileCard />
