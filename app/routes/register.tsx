@@ -21,10 +21,12 @@ import { authenticator } from "~/lib/auth.server";
 import { getSession, commitSession } from "~/lib/session.server";
 import Alert from "@mui/material/Alert";
 import SubmitButton from "~/src/components/SubmitButton";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function Enroll() {
   const { error } = useLoaderData();
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Layout>
       <Container component="main" maxWidth="xs">
@@ -33,13 +35,14 @@ export default function Enroll() {
           sx={{
             display: "flex",
             flexDirection: "column",
+            mt: isMobile ? 0 : 15,
           }}
           elevation={0}
           square
         >
           {error && <Alert severity="error">{error.message}</Alert>}
           <Typography component="h1" variant="h5" sx={{ fontWeight: "bold" }}>
-            ENROLL
+            Enroll
           </Typography>
           <Typography variant="caption" color="darkgray">
             Welome! Please fill in the required details to enroll
@@ -95,12 +98,11 @@ export default function Enroll() {
                   { label: "Two", value: "TWO" },
                   { label: "Three", value: "THREE" },
                 ]}
-                styles={{ mb: 3 }}
               />
             </FormControl>
             <SubmitButton title="Enroll" formId="signUp" />
             <Grid container>
-              <Grid item sx={{ px: 4 }}>
+              <Grid item sx={{ px: isMobile ? 1 : 4 }}>
                 <Link to="/" style={{ color: "blue", fontSize: 13 }}>
                   {"Already have an account? Sign In"}
                 </Link>

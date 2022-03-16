@@ -20,6 +20,7 @@ const SubmitButton = ({ formId, title, styles, value }: AppProps) => {
       type="submit"
       fullWidth
       name="button"
+      size="small"
       value={value}
       variant="contained"
       color="primary"
