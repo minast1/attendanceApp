@@ -63,7 +63,14 @@ export default function EditProfile() {
 
       <Divider sx={{ my: 1 }} />
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button size="small" type="submit" color="warning" variant="contained">
+        <Button
+          size="small"
+          type="submit"
+          color="warning"
+          variant="contained"
+          disableElevation
+          disabled
+        >
           Submit Order
         </Button>
       </Box>
